@@ -5,7 +5,7 @@ var Restaurant = require('../models').Restaurant;
 var Activity = require('../models').Activity; 
 var Day = require('../models').Day;
 
-router.get((req, res, next) =>{
+router.get('/', (req, res, next) =>{
     Day.findAll()
         .then(days =>{
             console.log(days)
