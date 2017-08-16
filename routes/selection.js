@@ -1,8 +1,8 @@
 var Promise = require('bluebird');
 var router = require('express').Router();
-var Hotel = require('../../models').Hotel;
-var Restaurant = require('../../models').Restaurant;
-var Activity = require('../../models').Activity;
+var Hotel = require('../models').Hotel;
+var Restaurant = require('../models').Restaurant;
+var Activity = require('../models').Activity;
 
 router.get('/hotels', (req,res,next) =>{
   Hotel.findAll()
