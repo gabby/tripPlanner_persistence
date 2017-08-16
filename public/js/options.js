@@ -18,8 +18,60 @@ $(function () {
     var $activitySelect = $optionsPanel.find('#activity-choices');
 
   // ~~~~~~~~~~~~~~~~~~~~~~~
-    // This looks like a great place to start AJAX work with a request for all attractions. Don't forget that these kinds of requests are async, so we won't have all of the attractions until it comes back, but once it comes back we can make the option tags
-  // ~~~~~~~~~~~~~~~~~~~~~~~
+    // This looks like a great place to start AJAX work with a request for all attractions. Don't forget that these kinds of requests are async, so we won't have all of the attractions until it comes back, but once it comes back we can make the option  
+      function getAllHotels(){
+        return $.ajax({
+          method: 'GET',
+          url: '/api/hotels'
+        })
+      } 
+
+      function getAllRestaurants(){
+        return $.ajax({
+          method: 'GET',
+          url: '/api/restaurants'
+        })
+      } 
+
+      function getAllActivities(){
+        return $.ajax({
+          method: 'GET',
+          url: '/api/activities'
+        })
+      } 
+
+      function renderAllHotels(response){
+        response.forEach( (hotel) => {
+          $hotelSelect.append(`<option>${hotel.name}</option>`)
+        })
+      }; 
+
+      function renderAllRestaurants(response){
+        response.forEach( (restaurant) => {
+          $restaurantSelect.append(`<option>${restaurant.name}</option>`)
+        })
+      };  
+
+      function renderAllActivities(response){
+        response.forEach( (activity) => {
+          $activitySelect.append(`<option>${activity.name}</option>`)
+        })
+      }; 
+
+      getAllHotels()
+      .then(renderAllHotels);
+
+      getAllRestaurants()
+      .then(renderAllRestaurants);
+
+      getAllActivities()
+      .then(renderAllActivities);
+      
+
+
+
+
+      // ~~~~~~~~~~~~~~~~~~~~~~~
 
     // make all the option tags (second arg of `forEach` is a `this` binding)
     hotels.forEach(makeOption, $hotelSelect);

@@ -1,17 +1,11 @@
 var express = require('express');
 var volleyball = require('volleyball');
 var bodyParser = require('body-parser');
-var nunjucks = require('nunjucks');
 var path = require('path');
 
 var db = require('./models').db;
 
 var app = express();
-
-// nunjucks rendering boilerplate
-nunjucks.configure('views', { noCache: true });
-app.set('view engine', 'html');
-app.engine('html', nunjucks.render);
 
 // logging and body-parsing
 app.use(volleyball);
@@ -27,6 +21,8 @@ app.use(express.static(path.join(__dirname, '/public')));
 
 // serve dynamic routes
 app.use(require('./routes'));
+app.use('/api/day', require('./routes/api/days'))
+app.use('/api', require('./routes/api/api'));
 
 // failed to catch req above means 404, forward to error handler
 app.use(function (req, res, next) {
