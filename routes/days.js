@@ -46,18 +46,21 @@ router.post('/', (req, res, next) =>{
     .catch(next)
 })
 
-router.post('/:dayId/:attraction', (req,res,next) =>{
-    // const dayId = req.params.dayId;
+router.post('/:id/:attraction', (req,res,next) =>{
+    
+    // const dayId = req.params.id;
     // const attractionType = req.params.attraction;
     // Day.findOne({
     //     where: {
     //         number: dayId,
     //     }, 
     // })
+
     // .then( foundDay =>{
     //     switch(attractionType) {
     //         case 'hotels':   //setHotel/ 
-    //             foundDay.hotelId /
+            
+    //             foundDay.setHotel()
     //             break; 
     //         case 'restaurants':  addRestaurant
     //             Restaurant.create(req.body);

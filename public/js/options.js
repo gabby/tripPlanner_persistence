@@ -97,9 +97,21 @@ $(function () {
         var $select = $(this).siblings('select');
         var type = $select.data('type'); // from HTML data-type attribute
         var id = $select.find(':selected').val();
-        // get associated attraction and add it to the current day in the trip
+        //var id = $select.find(':selected').id
+        //get associated attraction and add it to the current day in the trip
         var attraction = attractionsModule.getByTypeAndId(type, id);
         tripModule.addToCurrent(attraction);
+        // console.log(currentDay.number)
+        // $.ajax({
+        //   method: 'POST',
+        //   url: '/'+currentDay.number+'/'+type 
+        // })
+        // .then(() =>{
+         
+        //   var $newDiv = $(`<div class="itinerary-item"><span class="title">${$select.name}</span><button class="btn btn-xs btn-danger remove btn-circle">x</button></div>`) 
+          
+        //   $(`ul[data-type="${type}"]`).append($newDiv);
+        // })
     });
 
 });

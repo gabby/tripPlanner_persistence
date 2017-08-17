@@ -99,8 +99,14 @@ var dayModule = (function () {
   // ~~~~~~~~~~~~~~~~~~~~~~~
   Day.prototype.addAttraction = function (attraction) {
     // adding to the day object
+    $.ajax({
+        method: 'POST',
+        url: '/'+this.number+'/'+ 
+      })
+
     switch (attraction.type) {
       case 'hotel':
+      
         if (this.hotel) this.hotel.hide();
         this.hotel = attraction;
         break;
