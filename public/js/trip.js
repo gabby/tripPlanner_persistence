@@ -46,7 +46,10 @@ var tripModule = (function () {
     $addButton.on('click', function(){
       $.ajax({
         method: 'POST',
-        url: '/api/days'
+        url: '/api/days',
+        data: {
+          number: days.length+1
+        }
       })
       .then(() =>{
         addDay();

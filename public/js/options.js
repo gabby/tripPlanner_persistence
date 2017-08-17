@@ -59,13 +59,21 @@ $(function () {
       }; 
 
       getAllHotels()
-      .then(renderAllHotels);
+      .then((hotels) =>{
+        attractionsModule.loadEnhancedAttractions('hotel', hotels)
+        renderAllHotels(hotels);
+      });
 
       getAllRestaurants()
-      .then(renderAllRestaurants);
+      .then( (restaurants) =>{
+        attractionsModule.loadEnhancedAttractions('restaurants', restaurants);
+        renderAllRestaurants(restaurants);
+      });
 
       getAllActivities()
-      .then(renderAllActivities);
+      .then( (activities) =>{
+        attractionsModule.loadEnhancedAttractions('activities', activities);renderAllActivities(activities);
+      });
       
 
 
@@ -81,7 +89,7 @@ $(function () {
     // Once you've made AJAX calls to retrieve this information,
     // call attractions.loadEnhancedAttractions in the fashion
     // exampled below in order to integrate it.
-    // attractionsModule.loadEnhancedAttractions('hotels', hotels);
+    // //attractionsModule.loadEnhancedAttractions('hotel', hotels)
     // attractionsModule.loadEnhancedAttractions('restaurants', restaurants);
     // attractionsModule.loadEnhancedAttractions('activities', activities);
 
@@ -97,18 +105,9 @@ $(function () {
         var $select = $(this).siblings('select');
         var type = $select.data('type'); // from HTML data-type attribute
         var id = $select.find(':selected').val();
-        //var id = $select.find(':selected').id
         //get associated attraction and add it to the current day in the trip
         var attraction = attractionsModule.getByTypeAndId(type, id);
-        tripModule.addToCurrent(attraction);
-        // console.log(currentDay.number)
-        // 
-        // .then(() =>{
-         
-        //   var $newDiv = $(`<div class="itinerary-item"><span class="title">${$select.name}</span><button class="btn btn-xs btn-danger remove btn-circle">x</button></div>`) 
-          
-        //   $(`ul[data-type="${type}"]`).append($newDiv);
-        // })
+        tripModule.addToCurrent(attraction);       
     });
 
 });

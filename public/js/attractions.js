@@ -16,6 +16,7 @@ var attractionsModule = (function () {
     // private helper methods (only available inside the module)
 
     function findById(array, id) {
+        console.log(` THIS IS THE ARRAY: ${array}`);
         return array.find(function (el) {
             return +el.id === +id;
         });

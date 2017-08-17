@@ -99,25 +99,34 @@ var dayModule = (function () {
   // ~~~~~~~~~~~~~~~~~~~~~~~
   Day.prototype.addAttraction = function (attraction) {
     // adding to the day object
-    $.ajax({
-        method: 'POST',
-        url: '/'+this.number+'/'+ 
-      })
+          
+        //   $(`ul[data-type="${type}"]`).append($newDiv);
+        // })
 
-    switch (attraction.type) {
-      case 'hotel':
-      
-        if (this.hotel) this.hotel.hide();
-        this.hotel = attraction;
-        break;
-      case 'restaurant':
-        utilsModule.pushUnique(this.restaurants, attraction);
-        break;
-      case 'activity':
-        utilsModule.pushUnique(this.activities, attraction);
-        break;
-      default: console.error('bad type:', attraction);
-    }
+    $.ajax({
+      method: 'POST',
+      url: '/'+this.number+'/'+attraction.type,
+      data: {
+        name: attraction.name
+      } 
+    })
+    .then ((attraction) => {
+      switch (attraction.type) {
+        case 'hotel':
+          if (this.hotel) this.hotel.hide();
+          this.hotel = attraction;
+          break;
+        case 'restaurant':
+          utilsModule.pushUnique(this.restaurants, attraction);
+          break;
+        case 'activity':
+          utilsModule.pushUnique(this.activities, attraction);
+          break;
+        default: console.error('bad type:', attraction);
+      }
+      // const $newDiv = $(`<div class="itinerary-item"><span class="title">${newAttraction.name}</span><button class="btn btn-xs btn-danger remove btn-circle">x</button></div>`)
+      // $(`ul[data-type="${attraction.type}"]`).append($newDiv);
+    })
     // activating UI
     attraction.show();
   };

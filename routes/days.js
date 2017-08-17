@@ -41,38 +41,19 @@ router.delete('/:id', (req, res, next) =>{
 router.post('/', (req, res, next) =>{
     Day.create(req.body)  
     .then( day =>{
+        console.log(req.body);
         res.json(day)
     })
     .catch(next)
 })
 
 router.post('/:id/:attraction', (req,res,next) =>{
-    
-    // const dayId = req.params.id;
-    // const attractionType = req.params.attraction;
-    // Day.findOne({
-    //     where: {
-    //         number: dayId,
-    //     }, 
-    // })
-
-    // .then( foundDay =>{
-    //     switch(attractionType) {
-    //         case 'hotels':   //setHotel/ 
-            
-    //             foundDay.setHotel()
-    //             break; 
-    //         case 'restaurants':  addRestaurant
-    //             Restaurant.create(req.body);
-    //             break;
-    //         case 'activities': 
-    //             Activity.create(req.body);
-    //             break;
-    //     }
-    // })
-    // .then(createdAttraction =>{
-
-    // }) 
+    Day.findOne({
+        where: {
+            number: req.params.id,
+        }
+    }, {})
+    .catch(next);
 })
 
 
