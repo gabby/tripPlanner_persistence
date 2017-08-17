@@ -17,7 +17,7 @@ router.get('/', (req, res, next) =>{
 router.get('/:id', (req, res, next) =>{
     Day.findOne({
         where: {
-            id: req.params.id
+            number: req.params.id
         }
     })
         .then(day =>{
@@ -29,17 +29,48 @@ router.get('/:id', (req, res, next) =>{
 router.delete('/:id', (req, res, next) =>{
     Day.destroy({
         where: {
-            id: req.params.id
+            number: req.params.id
         }
     })
-    .catch(next)
-       
+    .then( response =>{
+        res.json(response)
+    })
+    .catch(next)  
 } )
 
 router.post('/', (req, res, next) =>{
-    Day.create(req.body)
+    Day.create(req.body)  
+    .then( day =>{
+        res.json(day)
+    })
     .catch(next)
-} )
+})
+
+router.post('/:dayId/:attraction', (req,res,next) =>{
+    // const dayId = req.params.dayId;
+    // const attractionType = req.params.attraction;
+    // Day.findOne({
+    //     where: {
+    //         number: dayId,
+    //     }, 
+    // })
+    // .then( foundDay =>{
+    //     switch(attractionType) {
+    //         case 'hotels':   //setHotel/ 
+    //             foundDay.hotelId /
+    //             break; 
+    //         case 'restaurants':  addRestaurant
+    //             Restaurant.create(req.body);
+    //             break;
+    //         case 'activities': 
+    //             Activity.create(req.body);
+    //             break;
+    //     }
+    // })
+    // .then(createdAttraction =>{
+
+    // }) 
+})
 
 
 module.exports = router;

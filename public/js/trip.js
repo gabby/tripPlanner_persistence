@@ -42,8 +42,27 @@ var tripModule = (function () {
     // before calling `addDay` or `deleteCurrentDay` that update the frontend (the UI), we need to make sure that it happened successfully on the server
   // ~~~~~~~~~~~~~~~~~~~~~~~
   $(function () {
-    $addButton.on('click', addDay);
-    $removeButton.on('click', deleteCurrentDay);
+
+    $addButton.on('click', function(){
+      $.ajax({
+        method: 'POST',
+        url: '/api/days'
+      })
+      .then(() =>{
+        addDay();
+      })
+     });
+    
+    
+    $removeButton.on('click', function() {
+      $.ajax({
+        method: 'DELETE',
+        url: '/api/days/'+currentDay.number
+      })
+      .then (() =>{
+        deleteCurrentDay();
+      })
+    })
   });
 
 
@@ -77,6 +96,8 @@ var tripModule = (function () {
     });
     switchTo(newCurrent);
     previousDay.hideButton();
+    // console.log(`This is CURRENT DAY: ${currentDay}`)
+    // console.log(`This is CURRENT DAY NUM: ${currentDay.number}`)
   }
 
   // globally accessible module methods
